@@ -4,15 +4,16 @@ async function getUser() {
         const users = res.data;
         const list = document.getElementById('list');
         list.innerHTML = '';
+                                                            
+        Object.keys(users).map(function (key) {                 //사용자마다 반복적으로 화면 표시 및 이벤트 연결
+            const userDiv = document.createElement('div');      // <div> 생성 -> userdiv
 
-        //사용자마다 반복적으로 화면 표시 및 이벤트 연결
-        Object.keys(users).map(function (key) {
-            const userDiv = document.createElement('div');
-            const span = document.createElement('span');
-            span.textContent = users[key];
-            const edit = document.createElement('button');
+            const span = document.createElement('span');        // <span> 생성 -> span
+            span.textContent = users[key];          
+
+            const edit = document.createElement('button');      //버튼 생성(수정)
             edit.textContent = '수정';
-            edit.addEventListener('click', async () =>{ //수정 버튼 클릭
+            edit.addEventListener('click', async () =>{         //수정 버튼 클릭
                 const name = prompt('바꿀 이름을 선택하세요');
                 if(!name){
                     return alert('이름을 반드시 선택해야 합니다');
@@ -24,6 +25,7 @@ async function getUser() {
                     console.error(err);
                 }
             });
+
             const remove = document.createElement('button');
             remove.textContent = '삭제';
             remove.addEventListener('click', async () =>{
@@ -34,6 +36,7 @@ async function getUser() {
                     console.error(err);
                 }
             });
+
             userDiv.appendChild(span);
             userDiv.appendChild(edit);
             userDiv.appendChild(remove);
