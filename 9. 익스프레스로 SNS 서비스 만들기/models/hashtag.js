@@ -19,5 +19,7 @@ module.exports = class Hasgtag extends Sequelize.Model {
             collate: 'utf8mb4_general_ci',
         });
     }
-    static associate(db) {}
+    static associate(db) {
+        db.Hasgtag.belongsToMany(db.Post, {through: 'PostHashtag'});
+    }
 };
